@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<htm>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap" rel="stylesheet">
+    <title>Quiz App</title>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+        background: white;
+        height: 100%;
+        width: 100%;
+      }
+
+      .quiz-app {
+        margin: 16px auto;
+        height: auto;
+        min-height: 630px;
+        width: 330px;
+        background-color: #259821;
+        border-style: solid;
+        border-width: 10px;
+        border-color: #1475cf;
+        border-radius: 30px;
+      }
+
+      #code {
+        margin-left: 70px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 200;
+        color: #ffffff;
+      }
+
+      #code1 {
+        /* margin-left: 100px; */
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 200;
+        color: #ffffff;
+      }
+
+      .time-bar {
+        margin: 30px auto;
+        width: 300px;
+        height: 30px;
+        border-style: solid;
+        border-width: 2px;
+        border-radius: 30px;
+        border-color: #ffffff;
+        background-color: #ffffff;
+      }
+
+      .time-left {
+        width: 300px;
+        height: 30px;
+        border-style: none;
+        border-radius: 30px;
+        border-color: #1475cf;
+        background-color: #1475cf;
+
+
+      }
+
+      .time {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: #1475cf;
+        text-align: center;
+      }
+
+      .q-text {
+        color: #ffffff;
+        text-align: left;
+        margin-left: 20px;
+        margin-top: 30px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        font-size: 20px;
+      }
+
+      #question {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        color: white;
+        padding: 10px 20px 25px 20px;
+
+      }
+
+      .btn {
+        width: 250px;
+        height: 50px;
+        margin-bottom: 10px;
+        margin-left: 40px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 10px;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        background-color: #1475cf;
+        color: white;
+        border-color: #ffffff;
+        outline: none;
+
+
+      }
+
+      /* .btn:hover{
+        background: linear-gradient(90deg, #2f3031  46%, #1475cf 50%, #1475cf 100%);
+      } */
+      .btn:active {
+        background: rgb(0, 0, 0);
+
+      }
+
+      #next,
+      .restart {
+        padding: 15px 40px 15px 40px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        font-size: 15px;
+        border-style: solid;
+        border-width: 1.5px;
+        border-radius: 30px;
+        background-color: #259821;
+        color: white;
+        border-color: #fcfcfc;
+        margin-left: 100px;
+        margin-top: 10px;
+        outline: none;
+
+
+      }
+
+      #next:hover,
+      .restart:hover {
+        background-color: white;
+        color: #117EEB;
+        border-color: white;
+      }
+
+      #dots {
+        color: #ffffff;
+        margin-left: 20px;
+        margin-top: -20px;
+      }
+
+      .il {
+        color: white;
+        font-size: 100px;
+        margin-top: 130px;
+        margin-left: 80px;
+        border-radius: 12px;
+      }
+
+      .app {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        font-size: 25px;
+        color: white;
+        text-align: center;
+
+      }
+
+      .next-btn {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main-div">
+      <div class="quiz-app">
+        <div class="start" id="start" style="display: block;">
+          <img src="Logo-01 - Copy.png" height="160px" width="160px" class="il" />
+          <h1 class="app">GAMING <br> QUIZ GP</h1>
+          <p id="code">&copy; Developed By Digilabs</p>
+          <div class="next-btn">
+            <button class="restart" onclick="forceStart()">Start</button>
+          </div>
+        </div>
+        <div class="quiz" id="quiz-secreen" style="display:none;">
+          <div class="time-bar">
+            <div class="time-left" id="timeLeft">
+
+            </div>
+          </div>
+          <div class="question-no">
+            <h3 class="q-text">Questions<span id="currentQuestion"> 1</span> / <span id="totalQuestions"> 10</span></h3>
+            <h3 id="dots">............................................................</h3>
+          </div>
+          <div class="qus">
+            <h1 id="question">Developed By</h1>
+
+          </div>
+          <div class="choices">
+            <button class="btn" id="opt1">Digilabs</button>
+            <button class="btn" id="opt2">Digilabs</button>
+            <button class="btn" id="opt3">Digilabs</button>
+            <button class="btn" id="opt4">Digilabs</button>
+          </div>
+          <div class="next-btn">
+            <button id="next">Next</button>
+          </div>
+        </div>
+        <div class="result" id="resultSecreen" style="display: none;">
+          <img src="Logo-01 - Copy.png" height="160px" width="160px" class="il" />
+          <h1 class="app"> Score : <span id="score">10</span></h1>
+          <h4 id="code1">Congratulations!!</h4>
+
+          <div class="next-btn">
+            <button class="restart" onclick="window.location.reload()">Restart</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <script>
+      var currentQuestion = 0;
+      var totalScore = 0;
+      var cQuestion = document.getElementById('currentQuestion');
+      var totalQuestions = document.getElementById('totalQuestions');
+      var splashSecreen = document.getElementById('start');
+      var quizScreen = document.getElementById('quiz-secreen');
+      var x = 0;
+      var resultSecreen = document.getElementById('resultSecreen');
+      var timeLeft = document.getElementById('timeLeft');
+      var score = document.getElementById('score');
+      var question = document.getElementById('question');
+      var opt1 = document.getElementById('opt1');
+      var opt2 = document.getElementById('opt2');
+      var opt3 = document.getElementById('opt3');
+      var opt4 = document.getElementById('opt4');
+      var btn = document.getElementsByClassName('btn');
+      var next = document.getElementById('next');
+      var choice = document.getElementById('choice');
+      var code1 = document.getElementById('code1');
+      var quizQuestions = [
+        {
+          question: "Which of the following should not be used to treat a productive cough?",
+          choice1: "Guaifenesin",
+          choice2: "Dextromethorphan",
+          choice3: "Diphenhydramine",
+          choice4: "Simple linctus",
+          ans: "Dextromethorphan",
+        },
+        {
+          question: "Which of the following can cause dry mouth as a side effect?",
+          choice1: "Guaifenesin",
+          choice2: "Dextromethorphan",
+          choice3: "Diphenhydramine",
+          choice4: "Simple linctus",
+          ans: "Diphenhydramine",
+        },
+        {
+          question: "Which of the following should be used in caution with patients suffering from glaucoma or benign prostatic hypertrophy?",
+          choice1: "Diphenhydramine",
+          choice2: "Pseudoephedrine",
+          choice3: "Xylometazoline",
+          choice4: "All",
+          ans: "Diphenhydramine",
+        },
+        {
+          question: "Ambroxol offers a quick relief of symptoms because",
+          choice1: "Ambroxol starts working after about 30 minutes of its oral administration",
+          choice2: "Ambroxol starts working after about 60 minutes of its oral administration",
+          choice3: "Ambroxol starts working within few hours of its oral administration",
+          choice4: "None of the above",
+          ans: "Ambroxol starts working after about 30 minutes of its oral administration",
+        },
+        {
+          question: "Why levosalbutamol should be preferred over racemic mixture",
+          choice1: "Because it has lower therapeutic index than racemic mixture",
+          choice2: "Because it has higher therapeutic index than racemic mixture",
+          choice3: "Both have equal therapeutic index",
+          choice4: "None of the above",
+          ans: "Because it has higher therapeutic index than racemic mixture",
+        }
+      ];
+      function nextQuestion(no) {
+        Inter(300);
+        cQuestion.textContent = " " + (no + 1);
+        totalQuestions.textContent = " " + quizQuestions.length;
+        console.log("number " + no);
+        question.textContent = quizQuestions[no].question;
+        opt1.textContent = quizQuestions[no].choice1;
+        opt2.textContent = quizQuestions[no].choice2;
+        opt3.textContent = quizQuestions[no].choice3;
+        opt4.textContent = quizQuestions[no].choice4;
+      }
+      var z = setInterval(function () {
+        if (x == 1) {
+          clearInterval(z);
+          splashSecreen.style.display = "none";
+          quizScreen.style.display = "block";
+          nextQuestion(currentQuestion);
+        }
+        x++;
+      }, 2000);
+      for (var i = 0; i < btn.length; i++) {
+        btn[i].onclick = function () {
+          if (this.textContent == quizQuestions[currentQuestion].ans) {
+            totalScore += 10;
+            if (currentQuestion < 4) {
+              clearInterval(bar);
+              currentQuestion++;
+              nextQuestion(currentQuestion);
+              console.log(totalScore);
+            } else {
+              endSecreen();
+            }
+          }
+          else {
+            if (currentQuestion < 4) {
+              currentQuestion++;
+              clearInterval(bar);
+              nextQuestion(currentQuestion);
+              console.log(totalScore);
+            } else {
+              endSecreen();
+            }
+          }
+        }
+      }
+      var bar;
+      function endSecreen() {
+        quizScreen.style.display = "none";
+        resultSecreen.style.display = "block";
+        score.textContent = totalScore;
+        if (Math.round((quizQuestions.length * 10) / 2) > totalScore) {
+          code1.textContent = "Sorry!!";
+        }
+      }
+      function Inter(set) {
+        var statusTime = set;
+        timeLeft.style.width = statusTime + "px";
+        bar = setInterval(function () {
+          if (statusTime == 0) {
+            clearInterval(bar);
+            if (currentQuestion < 4) {
+              currentQuestion++;
+              nextQuestion(currentQuestion);
+            }
+            else {
+              endSecreen();
+            }
+
+          }
+          timeLeft.style.width = statusTime + "px";
+          statusTime = statusTime - 30;
+        }, 1500);
+      }
+      next.onclick = function () {
+        if (currentQuestion < 4) {
+          currentQuestion++;
+          nextQuestion(currentQuestion);
+        }
+        else {
+          endSecreen();
+        }
+
+      }
+      function forceStart() {
+        clearInterval(z);
+        splashSecreen.style.display = "none";
+        quizScreen.style.display = "block";
+        nextQuestion(currentQuestion);
+      }
+    </script>
+  </body>
+</htm>
