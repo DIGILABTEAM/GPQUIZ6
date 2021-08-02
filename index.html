@@ -1,376 +1,284 @@
 <!DOCTYPE html>
-<htm>
 
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap" rel="stylesheet">
-    <title>Quiz App</title>
-    <style>
-      body {
-        margin: 0px;
-        padding: 0px;
-        background: white;
-        height: 100%;
-        width: 100%;
-      }
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gaming Quiz</title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.4.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="icon" type="image/png" href="img/icon1.png" />
+	<script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="js/circle-progress.js" type="text/javascript"></script>
+	<script src="js/questions.js" type="text/javascript"></script>
+	<script src="js/app.js" type="text/javascript"></script>
+	<script src="js/jquery.mobile-1.4.4.min.js" type="text/javascript"></script>
+</head>
 
-      .quiz-app {
-        margin: 16px auto;
-        height: auto;
-        min-height: 630px;
-        width: 330px;
-        background-color: #259821;
-        border-style: solid;
-        border-width: 10px;
-        border-color: #1475cf;
-        border-radius: 30px;
-      }
+<body>
+	<audio id="correctSound" src="audio/Correct%20Sound.mp3" type="audio/mp3" preload="auto"></audio>
+	<audio id="timerSound" src="audio/Timer%20Sound.mp3" type="audio/mp3" preload="auto"></audio>
+	<div id="HomeScreen" data-role="page" data-theme="z">
+		<div class="navbar">
+			<img src="img/icon.png" alt="D'Quiz Logo" />
+			<!-- <p>Gaming Quiz</p> -->
 
-      #code {
-        margin-left: 70px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 200;
-        color: #ffffff;
-      }
+			<i class="fa fa-ellipsis-v fa-2x menu"></i>
+			<ul class="more">
+				<li><a href="#statistics" data-transition="fade" onClick="showStatistics();">Statistics</a></li>
+				<li><a href="#about" data-transition="pop">About</a></li>
+			</ul>
+		</div>
+		<div class="center">
+			<label for="Name">
+				<p>Enter Your Name:</p>
+			</label>
+			<div class="input">
+				<input id="Name" type="text" data-role="none" placeholder="Your Name..." />
+			</div>
+			<a class="go" href="#welcome" data-transition="slide" onClick="setUserName();">Go<br><i
+					class="fa fa-arrow-circle-right fa-lg"></i></a>
+		</div>
+	</div>
 
-      #code1 {
-        /* margin-left: 100px; */
-        text-align: center;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 200;
-        color: #ffffff;
-      }
+	<div id="welcome" data-role="page" data-theme="z">
+		<div class="navbar">
+			<img src="img/icon.png" alt="D'Quiz Logo" />
+			<!-- <p>Gaming Quiz</p> -->
+			<i class="fa fa-ellipsis-v fa-2x menu"></i>
+			<ul class="more">
+				<li><a href="#statistics" data-transition="fade" onClick="showStatistics();">Statistics</a></li>
+				<li><a href="#about" data-transition="pop">About</a></li>
+			</ul>
+		</div>
+		<div class="userWelcome">
+			<p class="userWel">Welcome</p>
+			<p class="userName" id="userN">User</p>
+		</div>
+		<div class="info">
+			<!-- <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; GP Gaming Quiz is an Interactive Quiz App for
+				Testing your Knowledge. You will have a bunch of exciting
+				questions! <br><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Each Quiz will
+				have 5 questions and you will have only 15 seconds to answer each question. Each question carries 20
+				points and a wrong answer will have negative marking of 5 points. Are you ready to play? Click on start
+				button<br><br></p> -->
+			<a href="#categories" data-transition="slide">
+				<a href="#questionTemplate" onClick="setI(0)">
+				<div class="start">Start <i class="fa fa-caret-right"></i></div>
+				</a>
+			</a>
+		</div>
+	</div>
 
-      .time-bar {
-        margin: 30px auto;
-        width: 300px;
-        height: 30px;
-        border-style: solid;
-        border-width: 2px;
-        border-radius: 30px;
-        border-color: #ffffff;
-        background-color: #ffffff;
-      }
+	<div id="categories" data-role="page" data-theme="z">
+		<div class="navbar">
+			<img src="img/icon.png" alt="D'Quiz Logo" />
+			<!-- <p>Gaming Quiz</p> -->
+			<i class="fa fa-ellipsis-v fa-2x menu"></i>
+			<ul class="more">
+				<li><a href="#statistics" data-transition="fade" onClick="showStatistics();">Statistics</a></li>
+				<li><a href="#about" data-transition="pop">About</a></li>
+			</ul>
+		</div>
+		<div class="categories">
+			<div class="cHeader">Select the Topic:</div>
+			<a href="#questionTemplate" onClick="setI(0)">
+				<div class="topic">GP<i class="fa fa-angle-double-right"></i></div>
+			</a>
 
-      .time-left {
-        width: 300px;
-        height: 30px;
-        border-style: none;
-        border-radius: 30px;
-        border-color: #1475cf;
-        background-color: #1475cf;
+		</div>
+		<div class="hoverBack">
+			<a href="#welcome" data-transition="slide" data-direction="reverse"><i class="fa fa-chevron-left"></i></a>
+		</div>
+	</div>
 
+	<div id="ready" data-role="page" data-theme="z">
+		<div class="readyBG">
+			<div class="readyButton">
+				<div class="readyText">Ready</div>
+				<i class="fa fa-spinner fa-spin fa-5x"></i>
+			</div>
+		</div>
+	</div>
 
-      }
+	<div id="questionTemplate" data-role="page" data-theme="z">
+		<div class="navbar">
+			<img src="img/icon.png" alt="D'Quiz Logo" />
+			<!-- <p>Gaming Quiz</p> -->
+			<i class="fa fa-ellipsis-v fa-2x menu"></i>
+			<ul class="more">
+				<li><a href="#dialogBoxRestart" data-transition="fade">Restart</a></li>
+				<li><a href="#dialogBoxMenu" data-transition="fade">Menu</a></li>
+				<li><a href="#about" data-transition="pop">About</a></li>
+			</ul>
+		</div>
+		<div class="centerQ">
+			<div class="controls">
+				<p class="qN">Question <span id="qNo">No.</span></p>
+				<div class="timer"><span id="time">10</span></div>
+				<p class="sc">Score: <span id="score">0</span></p>
+			</div>
+			<div class="qa">
+				<p id="question">Question?</p>
+				<ul class="options">
+					<li id="one" onClick="setScore(1);"><i id="option1">Option 1 </i> <span class="c"></span><span
+							class="w"></span></li>
+					<li id="two" onClick="setScore(2);"><i id="option2">Option 2 </i> <span class="c"></span><span
+							class="w"></span></li>
+					<li id="three" onClick="setScore(3);"><i id="option3">Option 3 </i> <span class="c"></span><span
+							class="w"></span></li>
+					<li id="four" onClick="setScore(4);"><i id="option4">Option 4 </i> <span class="c">/span><span
+							class="w"></span></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
-      .time {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        color: #1475cf;
-        text-align: center;
-      }
+	<div id="hideAnim" data-role="page" data-theme="z">
+		<div class="hideBG"></div>
+	</div>
 
-      .q-text {
-        color: #ffffff;
-        text-align: left;
-        margin-left: 20px;
-        margin-top: 30px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 900;
-        font-size: 20px;
-      }
+	<div id="results" data-role="page" data-theme="z">
+		<div class="navbar">
+			<img src="img/icon.png" alt="D'Quiz Logo" />
+			<!-- <p>Gaming Quiz</p> -->
+			<i class="fa fa-ellipsis-v fa-2x menu"></i>
+			<ul class="more">
+				<li><a href="#statistics" data-transition="fade" onClick="showStatistics();">Statistics</a></li>
+				<li><a href="#about" data-transition="pop">About</a></li>
+			</ul>
+		</div>
+		<div class="percentage">
+			<div class="percentBar">
+				<!-- <p id="percent">0%</p> -->
+			</div>
+		</div>
+		<div class="comment">
+			<p class="uScore">Your Score: <span id="userScore">0</span></p>
+			<p id="commentLine">Thank You for your valuable time</p>
+			<a href="#questionTemplate" onClick="restartQuiz();" data-transition="fade">
+				<div class="rButtons">Restart <i class="fa fa-chevron-right"></i></div>
+			</a>
+			<a href="#categories" onClick="reset();" data-transition="fade">
+				<div class="rButtons">Go to Menu <i class="fa fa-chevron-right"></i></div>
+			</a>
+			<a href="#statistics" data-transition="fade" onClick="showStatistics();">
+				<div class="rButtons">Check Your Stats <i class="fa fa-chevron-right"></i></div>
+			</a>
+		</div>
+		<div class="hoverBack">
+			<a href="#categories" data-transition="slide" data-direction="reverse"><i
+					class="fa fa-chevron-left"></i></a>
+		</div>
+	</div>
 
-      #question {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 15px;
-        color: white;
-        padding: 10px 20px 25px 20px;
+	<div id="statistics" data-role="page" data-theme="z">
+		<div class="navbar">
+			<img src="img/icon.png" alt="D'Quiz Logo" />
+			<!-- <p>Gaming Quiz</p> -->
+			<i class="fa fa-ellipsis-v fa-2x menu"></i>
+			<ul class="more">
+				<li><a href="#categories" data-transition="fade" onClick="reset();">Menu</a></li>
+				<li><a href="#dialogBoxReset">Reset</a></li>
+				<li><a href="#about" data-transition="pop">About</a></li>
+			</ul>
+		</div>
+		<div class="sPercentage">
+			<div class="sPercentBar">
+				<p id="sPercent">0%</p>
+			</div>
+		</div>
+		<div class="categoryPercentage">
+			<div class="sPercent">
+				<p id="firstChild">GP<span id="mP0">0%</span></p>
+				<meter value="0" id="m0"></meter>
+			</div>
+			<!-- <div class="sPercent">
+					<p>Queue <span id="mP1">0%</span></p>
+					<meter value="0" id="m1"></meter>
+				</div>
+				<div class="sPercent">
+					<p>Linked Lists <span id="mP2">0%</span></p>
+					<meter value="0" id="m2"></meter>
+				</div>
+				<div class="sPercent">
+					<p>Binary Trees <span id="mP3">0%</span></p>
+					<meter value="0" id="m3"></meter>
+				</div>
+				<div class="sPercent">
+					<p>General Trees <span id="mP4">0%</span></p>
+					<meter value="0" id="m4"></meter>
+				</div>
+				<div class="sPercent">
+					<p>Graphs <span id="mP5">0%</span></p>
+					<meter value="0" id="m5"></meter>
+				</div>
+				<div class="sPercent">
+					<p>Search & Sort <span id="mP6">0%</span></p>
+					<meter value="0" id="m6"></meter>
+				</div>
+				<div class="sPercent">
+					<p>Algorithms <span id="mP7">0%</span></p>
+					<meter value="0" id="m7"></meter> -->
+		</div>
+	</div>
+	<div class="hoverBack">
+		<a href="#" data-transition="fade" onclick="window.history.back();"><i class="fa fa-chevron-left"></i></a>
+	</div>
+	</div>
 
-      }
+	<div id="dialogBoxRestart" data-role="page" data-theme="z">
+		<div class="transBG">
+			<div class="box">
+				<p>Are you sure? Your entire progress will be lost.</p>
+				<div class="buttons">
+					<a href="#questionTemplate" onClick="restartQuiz();" class="okButton">OK</a>
+					<a href="#" onClick="window.history.back();" class="cancelButton">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
-      .btn {
-        width: 250px;
-        height: 50px;
-        margin-bottom: 10px;
-        margin-left: 40px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        font-size: 10px;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 10px;
-        background-color: #1475cf;
-        color: white;
-        border-color: #ffffff;
-        outline: none;
+	<div id="dialogBoxMenu" data-role="page" data-theme="z">
+		<div class="transBG">
+			<div class="box">
+				<p>Are you sure? Your entire progress will be lost.</p>
+				<div class="buttons">
+					<a href="#categories" onClick="reset();" class="okButton">OK</a>
+					<a href="#" onClick="window.history.back();" class="cancelButton">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
+	<div id="dialogBoxReset" data-role="page" data-theme="z">
+		<div class="transBG">
+			<div class="box">
+				<p>Are you sure? Your entire data will be lost.</p>
+				<div class="buttons">
+					<a href="#" onClick="localStorage.clear(); showStatistics(); window.location='#HomeScreen';"
+						class="okButton">OK</a>
+					<a href="#" onClick="window.history.back();" class="cancelButton">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="about" data-role="page" data-theme="z">
+		<i class="fa fa-arrow-circle-left fa-3x back" onClick="window.history.back();"></i>
+		<div class="centerA">
+			<img class="author" src="img/Logo.jpg" alt="Author" />
+			<p class="nameA">DIGILABS TEAM</p>
+			<div class="social">
+				<a href="#" onClick="window.open('DIGILAB', '_blank', 'location=yes');"><i
+						class="fa fa-google-plus-square fa-5x"></i></a>
+				<a href="#" onClick="window.open('DIGILAB', '_blank', 'location=yes');"><i
+						class="fa fa-facebook-square fa-5x"></i></a>
+				<a href="#" onClick="window.open('DIGILAB', '_blank', 'location=yes');"><i
+						class="fa fa-twitter-square fa-5x"></i></a>
+			</div>
+		</div>
+	</div>
+</body>
 
-      }
-
-      /* .btn:hover{
-        background: linear-gradient(90deg, #2f3031  46%, #1475cf 50%, #1475cf 100%);
-      } */
-      .btn:active {
-        background: rgb(0, 0, 0);
-
-      }
-
-      #next,
-      .restart {
-        padding: 15px 40px 15px 40px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 900;
-        font-size: 15px;
-        border-style: solid;
-        border-width: 1.5px;
-        border-radius: 30px;
-        background-color: #259821;
-        color: white;
-        border-color: #fcfcfc;
-        margin-left: 100px;
-        margin-top: 10px;
-        outline: none;
-
-
-      }
-
-      #next:hover,
-      .restart:hover {
-        background-color: white;
-        color: #117EEB;
-        border-color: white;
-      }
-
-      #dots {
-        color: #ffffff;
-        margin-left: 20px;
-        margin-top: -20px;
-      }
-
-      .il {
-        color: white;
-        font-size: 100px;
-        margin-top: 130px;
-        margin-left: 80px;
-        border-radius: 12px;
-      }
-
-      .app {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 900;
-        font-size: 25px;
-        color: white;
-        text-align: center;
-
-      }
-
-      .next-btn {
-        margin-bottom: 20px;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div class="main-div">
-      <div class="quiz-app">
-        <div class="start" id="start" style="display: block;">
-          <img src="Logo-01 - Copy.png" height="160px" width="160px" class="il" />
-          <h1 class="app">GAMING <br> QUIZ GP</h1>
-          <p id="code">&copy; Developed By Digilabs</p>
-          <div class="next-btn">
-            <button class="restart" onclick="forceStart()">Start</button>
-          </div>
-        </div>
-        <div class="quiz" id="quiz-secreen" style="display:none;">
-          <div class="time-bar">
-            <div class="time-left" id="timeLeft">
-
-            </div>
-          </div>
-          <div class="question-no">
-            <h3 class="q-text">Questions<span id="currentQuestion"> 1</span> / <span id="totalQuestions"> 10</span></h3>
-            <h3 id="dots">............................................................</h3>
-          </div>
-          <div class="qus">
-            <h1 id="question">Developed By</h1>
-
-          </div>
-          <div class="choices">
-            <button class="btn" id="opt1">Digilabs</button>
-            <button class="btn" id="opt2">Digilabs</button>
-            <button class="btn" id="opt3">Digilabs</button>
-            <button class="btn" id="opt4">Digilabs</button>
-          </div>
-          <div class="next-btn">
-            <button id="next">Next</button>
-          </div>
-        </div>
-        <div class="result" id="resultSecreen" style="display: none;">
-          <img src="Logo-01 - Copy.png" height="160px" width="160px" class="il" />
-          <h1 class="app"> Score : <span id="score">10</span></h1>
-          <h4 id="code1">Congratulations!!</h4>
-
-          <div class="next-btn">
-            <button class="restart" onclick="window.location.reload()">Restart</button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <script>
-      var currentQuestion = 0;
-      var totalScore = 0;
-      var cQuestion = document.getElementById('currentQuestion');
-      var totalQuestions = document.getElementById('totalQuestions');
-      var splashSecreen = document.getElementById('start');
-      var quizScreen = document.getElementById('quiz-secreen');
-      var x = 0;
-      var resultSecreen = document.getElementById('resultSecreen');
-      var timeLeft = document.getElementById('timeLeft');
-      var score = document.getElementById('score');
-      var question = document.getElementById('question');
-      var opt1 = document.getElementById('opt1');
-      var opt2 = document.getElementById('opt2');
-      var opt3 = document.getElementById('opt3');
-      var opt4 = document.getElementById('opt4');
-      var btn = document.getElementsByClassName('btn');
-      var next = document.getElementById('next');
-      var choice = document.getElementById('choice');
-      var code1 = document.getElementById('code1');
-      var quizQuestions = [
-        {
-          question: "Which of the following should not be used to treat a productive cough?",
-          choice1: "Guaifenesin",
-          choice2: "Dextromethorphan",
-          choice3: "Diphenhydramine",
-          choice4: "Simple linctus",
-          ans: "Dextromethorphan",
-        },
-        {
-          question: "Which of the following can cause dry mouth as a side effect?",
-          choice1: "Guaifenesin",
-          choice2: "Dextromethorphan",
-          choice3: "Diphenhydramine",
-          choice4: "Simple linctus",
-          ans: "Diphenhydramine",
-        },
-        {
-          question: "Which of the following should be used in caution with patients suffering from glaucoma or benign prostatic hypertrophy?",
-          choice1: "Diphenhydramine",
-          choice2: "Pseudoephedrine",
-          choice3: "Xylometazoline",
-          choice4: "All",
-          ans: "Diphenhydramine",
-        },
-        {
-          question: "Ambroxol offers a quick relief of symptoms because",
-          choice1: "Ambroxol starts working after about 30 minutes of its oral administration",
-          choice2: "Ambroxol starts working after about 60 minutes of its oral administration",
-          choice3: "Ambroxol starts working within few hours of its oral administration",
-          choice4: "None of the above",
-          ans: "Ambroxol starts working after about 30 minutes of its oral administration",
-        },
-        {
-          question: "Why levosalbutamol should be preferred over racemic mixture",
-          choice1: "Because it has lower therapeutic index than racemic mixture",
-          choice2: "Because it has higher therapeutic index than racemic mixture",
-          choice3: "Both have equal therapeutic index",
-          choice4: "None of the above",
-          ans: "Because it has higher therapeutic index than racemic mixture",
-        }
-      ];
-      function nextQuestion(no) {
-        Inter(300);
-        cQuestion.textContent = " " + (no + 1);
-        totalQuestions.textContent = " " + quizQuestions.length;
-        console.log("number " + no);
-        question.textContent = quizQuestions[no].question;
-        opt1.textContent = quizQuestions[no].choice1;
-        opt2.textContent = quizQuestions[no].choice2;
-        opt3.textContent = quizQuestions[no].choice3;
-        opt4.textContent = quizQuestions[no].choice4;
-      }
-      var z = setInterval(function () {
-        if (x == 1) {
-          clearInterval(z);
-          splashSecreen.style.display = "none";
-          quizScreen.style.display = "block";
-          nextQuestion(currentQuestion);
-        }
-        x++;
-      }, 2000);
-      for (var i = 0; i < btn.length; i++) {
-        btn[i].onclick = function () {
-          if (this.textContent == quizQuestions[currentQuestion].ans) {
-            totalScore += 10;
-            if (currentQuestion < 4) {
-              clearInterval(bar);
-              currentQuestion++;
-              nextQuestion(currentQuestion);
-              console.log(totalScore);
-            } else {
-              endSecreen();
-            }
-          }
-          else {
-            if (currentQuestion < 4) {
-              currentQuestion++;
-              clearInterval(bar);
-              nextQuestion(currentQuestion);
-              console.log(totalScore);
-            } else {
-              endSecreen();
-            }
-          }
-        }
-      }
-      var bar;
-      function endSecreen() {
-        quizScreen.style.display = "none";
-        resultSecreen.style.display = "block";
-        score.textContent = totalScore;
-        if (Math.round((quizQuestions.length * 10) / 2) > totalScore) {
-          code1.textContent = "Sorry!!";
-        }
-      }
-      function Inter(set) {
-        var statusTime = set;
-        timeLeft.style.width = statusTime + "px";
-        bar = setInterval(function () {
-          if (statusTime == 0) {
-            clearInterval(bar);
-            if (currentQuestion < 4) {
-              currentQuestion++;
-              nextQuestion(currentQuestion);
-            }
-            else {
-              endSecreen();
-            }
-
-          }
-          timeLeft.style.width = statusTime + "px";
-          statusTime = statusTime - 30;
-        }, 1500);
-      }
-      next.onclick = function () {
-        if (currentQuestion < 4) {
-          currentQuestion++;
-          nextQuestion(currentQuestion);
-        }
-        else {
-          endSecreen();
-        }
-
-      }
-      function forceStart() {
-        clearInterval(z);
-        splashSecreen.style.display = "none";
-        quizScreen.style.display = "block";
-        nextQuestion(currentQuestion);
-      }
-    </script>
-  </body>
-</htm>
+</html>
