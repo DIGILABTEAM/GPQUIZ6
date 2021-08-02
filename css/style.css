@@ -532,13 +532,13 @@ body .center a
 }
 .correctO
 {
-	background-color: #2af180dc !important;
+	background-color: #11b859dc !important;
 	color: white !important;
 	font-weight: 600;	
 }
 .wrong
 {
-	background-color: #fdca5c !important;
+	background-color: #fdbd31 !important;
 	color: white !important;
 	font-weight: 600;
 }
