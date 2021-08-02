@@ -6,7 +6,7 @@
 body
 {
 	-webkit-user-select: none;
-	background-color: #e74c3c;
+	/* background-color: #e74c3c; */
 	font-family: QuickSand !important;
 }
 body::-webkit-scrollbar
