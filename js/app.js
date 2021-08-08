@@ -4,7 +4,7 @@ $(document).ready(function () {
 	$(".menu").click(function () {
 		clearTimeout(timeID);
 		$(".more").fadeToggle("fast");
-		timeID = setTimeout(function () { $(".more").fadeOut("fast"); }, 500);
+		timeID = setTimeout(function () { $(".more").fadeOut("fast"); }, 1500);
 	});
 	$(".more").click(function () {
 		$(".more").fadeOut("fast");
@@ -21,7 +21,7 @@ $(document).ready(function () {
 
 /*--------------Global Variables---------------*/
 var i, k = 0, cQuestion, score = 0;
-var qTimeID, fTimeID, eTimeID, interval, time = 10;
+var qTimeID, fTimeID, eTimeID, interval, time = 15;
 var checkArray = new Array();
 var sQuestions = new Queue();
 /*---------------------------------------------*/
@@ -59,7 +59,7 @@ function setI(temp) {
 	eTimeID = undefined;
 	interval = undefined;
 	removeClasses();
-	time = 10;
+	time = 15;
 	timer(0, 0);
 	i = temp;
 	$("#ready").addClass("ui-page-active");
@@ -187,7 +187,7 @@ function timer(time, animate) {
 
 function startTimer() {
 	enableOnClick();
-	time = 10;
+	time = 15;
 	$("#time").html(time);
 	timer(1, 10000);
 	document.getElementById("timerSound").play();
@@ -199,14 +199,14 @@ function startTimer() {
 			disableOnClick();
 			showCorrectOption();
 		}
-	}, 1000);
+	}, 1500);
 }
 
 function nextQuestion() {
 	clearTimeout(fTimeID);
 	clearTimeout(qTimeID);
 	clearInterval(interval);
-	timer((10.5 - time) / 10.0, 0);
+	timer((10.0 - time) / 10.0, 0);
 	disableOnClick();
 	showCorrectOption();
 	document.getElementById("timerSound").pause();
@@ -251,7 +251,7 @@ function startQuiz() {
 	updateQuestions();
 	setTimeout(function () {
 		startTimer();
-		fTimeID = setTimeout(function () { nextQuestion(); }, 10300);
+		fTimeID = setTimeout(function () { nextQuestion(); }, 15000);
 	}, 4000);
 }
 
@@ -266,7 +266,7 @@ function setScore(option) {
 	else {
 		clearTimeout(qTimeID);
 		clearInterval(interval);
-		timer((10.5 - time) / 10.0, 0);
+		timer((15.0 - time) / 15.0, 0);
 		disableOnClick();
 		document.getElementById("timerSound").pause();
 		document.getElementById("timerSound").currentTime = 0;
@@ -616,7 +616,7 @@ function reset() {
 	eTimeID = undefined;
 	interval = undefined;
 	removeClasses();
-	time = 10;
+	time = 15;
 	timer(0, 0);
 }
 

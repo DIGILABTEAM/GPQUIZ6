@@ -713,12 +713,12 @@ body .center a
 	height: 400px;
 } */
 .percentBar
-{
+/* {
 	width: 250px;
 	padding-top: 110px;
 	margin-left: auto;
 	margin-right: auto;
-}
+} */
 .percentBar > p
 {
 	position: absolute;
