@@ -887,6 +887,13 @@ meter::-webkit-meter-optimum-value {
 	background-color: #e74c3c;	
 	border-radius: 17px;
 }
+.congratulation
+{
+	display:none;
+	margin-left: auto;
+    margin-right: auto;
+    width: 19%;
+}
 
 
 /*---------------------------------------------------------------*/
