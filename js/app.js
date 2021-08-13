@@ -527,7 +527,7 @@ function showResults() {
 	setPercentage(percent);
 	$("#percent").html(percent + "%");
 	$("#userScore").html(score);
-	if(score >= 80){ 
+	if(score >= 80){
 		document.getElementById('congratulation').style.display = 'block'
 	}
 	var comment;
